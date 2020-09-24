@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Register</title>
+<link rel="stylesheet" href="{% static 'css/log-reg.css' %}" type="text/css">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <form id="accesspanel" class="col-md-5" style="margin-top: 20px;" action=" " method="POST">
+        {% csrf_token %}
+        <h1 id="litheader">Create New Account</h1>
+        <div class="inset">
+            <p>
+                <label class="control-label">First Name <span class="mandatory">*</span></label>
+                <input name="first_name" placeholder=" First Name" type="text">
+            </p>
+            <p>
+                <label class="control-label">Last Name</label>
+                <input name="last_name" placeholder=" Last Name" type="text">
+            </p>
+            <p>
+                <label class="control-label">Address</label>
+                <textarea name="address" placeholder=" Address"></textarea>
+            </p>
+            <p>
+                <label class="control-label">City</label>
+                <input name="city" placeholder=" City" type="text">
+            </p>
+            <p>
+                <label class="control-label">State</label>
+            <div class="selectContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                    <select name="state" class="form-control selectpicker">
+                        <option value=" "> Please select your state</option>
+                        <option>Andra Pradesh</option>
+                        <option>Arunachal Pradesh</option>
+                        <option>Assam</option>
+                        <option>Bihar</option>
+                        <option>Chhattisgarh</option>
+                        <option>Goa</option>
+                        <option>Gujarat</option>
+                        <option>Haryana</option>
+                        <option>Himachal Pradesh</option>
+                        <option>Jharkhand</option>
+                        <option>Karnataka</option>
+                        <option>Kerala</option>
+                        <option>Madya Pradesh</option>
+                        <option>Maharashtra</option>
+                        <option>Manipur</option>
+                        <option>Meghalaya</option>
+                        <option>Mizoram</option>
+                        <option>Nagaland</option>
+                        <option>Orissa</option>
+                        <option>Punjab</option>
+                        <option>Rajasthan</option>
+                        <option>Sikkim</option>
+                        <option>Tamil Nadu</option>
+                        <option>Telagana</option>
+                        <option>Tripura</option>
+                        <option>Uttaranchal</option>
+                        <option>Uttar Pradesh</option>
+                        <option>West Bengal</option>
+
+                        <option>Andaman and Nicobar Islands</option>
+                        <option>Chandigarh</option>
+                        <option>Dadra & Nagar Haveli and Daman & Diu</option>
+                        <option>Delhi</option>
+                        <option>Jammu and Kashmir</option>
+                        <option>Lakshadweep</option>
+                        <option>Puducherry</option>
+                        <option>Ladakh</option>
+                    </select>
+                </div>
+            </div>
+            </p>
+            <p>
+                <label class="control-label">PIN Code</label>
+                <input name="pin" placeholder=" PIN Code" type="text">
+            </p>
+            <p>
+                <label class="control-label">Gender</label>
+            <div class="radio float-left">
+                <label>
+                    <input type="radio" name="gender" value="1" /> Male
+                </label>
+            </div>
+            <div class="radio float-left">&nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="gender" value="2" /> Female
+                </label>
+            </div>
+            <div class="radio float-left">&nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="gender" value="3" /> Other
+                </label>
+            </div>
+            </p>
+            <br>
+            <hr style=" border-color: rgba(12, 12, 12, 0.7);">
+            <p>
+                <label class="control-label">Phone <span class="mandatory">*</span></label>
+                <input name="phone" placeholder=" Mobile Number" type="text">
+            </p>
+            <p>
+            <div class="verify">
+                <button class="button-verify btn btn-success">Verify</button>
+                <label class="control-label">verified</label>
+            </div>
+            </p>
+            <p>
+                <label class="control-label">Phone 2</label>
+                <input name="phone_2" placeholder=" Mobile Number" type="text">
+            </p>
+            <p>
+            <div class="verify">
+                <button class="button-verify btn btn-success">Verify</button>
+                <label class="control-label">verified</label>
+            </div>
+            </p>
+            <p>
+                <label class="control-label">E-Mail <span class="mandatory">*</span></label>
+                <input name="email" placeholder=" E-Mail Address" type="text">
+                {% for error in form.email.errors %}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            </p>
+            <p>
+            <div class="verify">
+                <button class="button-verify btn btn-success">Verify</button>
+                <label class="control-label">verified</label>
+            </div>
+            </p>    
+            <p>
+                <label class="control-label">Password <span class="mandatory">*</span></label>
+                <input name="password1" placeholder=" Password" type="password">
+            </p>
+            <p>
+                <label class="control-label">Confirm Password <span class="mandatory">*</span></label>
+                <input name="password2" placeholder=" Confirm Password" type="password">
+                {% for error in form.password2.errors %}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            </p>
+            <p>
+                <!-- failure message -->
+            <div class="text-center error-alert" style="color: cadetblue;margin-top: .7rem;" role="alert" id="messages">
+                
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                {{ error }}
+                {% endfor %}
+            </div>
+            </p>
+
+        </div>
+
+        <p class="p-container">
+            <input type="submit" name="Register" id="go" value="Register">
+        </p>
+        <div style="font-size: 12px;padding-left: 1.5rem; margin-top: -1rem;">
+            <a href="{% url 'accounts_ns:login' %}">
+                Already have an Account ?</a>
+        </div>
+    </form>
+
+    <script src="{% static 'js/log-reg.js' %}"></script>
+</div>
+<!-- /.container -->
+{% endblock %}

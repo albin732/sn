@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- {% static "image" as baseUrl %} -->
+{% load cart %}
+{% load custom_filter %}
+
+
+{% block head %}
+<title>Home</title>
+{% endblock %}
+
+{% block body %}
+
+
+<!-- Page Content -->
+<div class="page" style="margin-top: -5rem;">
+    <!-- Banner Starts Here -->
+    <div class="banner header-text">
+        <div class="owl-banner owl-carousel">
+            <div class="banner-item-01">
+                <div class="text-content">
+                    <h4>Best Dining</h4>
+                    <h2>Authentic Tastes</h2>
+                </div>
+            </div>
+            <div class="banner-item-02">
+                <div class="text-content">
+                    <h4>Quality Service</h4>
+                    <h2>Elegant & Skilled Employees</h2>
+                </div>
+            </div>
+            <div class="banner-item-03">
+                <div class="text-content">
+                    <h4>Last Minute</h4>
+                    <h2>Natural outdoor Planning</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Ends Here -->
+
+    <div class="container">
+
+        <div class="latest-products">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Our Specials</h2>
+                            <a href="{% url 'stores_ns:products' %}">View full Menu <i
+                                    class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+
+
+                    {% for pdt in pdts %}
+                    {% if pdt.special and pdt.active %}
+                    <div class="col-lg-3 col-md-6" id='{{pdt.id}}'>
+                        <div class="pdt-item">
+                            <a href="{% url 'stores_ns:productdetails' %}{{ pdt.id }}">
+                                <div class="card-img-overlay vegmark">
+                                    {% if pdt.veg %}
+                                    <img src="{% static 'images/icons/veg.png' %}" alt="" srcset="">
+                                    {% else %}
+                                    <img src="{% static 'images/icons/nonveg.png' %}" alt="" srcset="">
+                                    {% endif %}
+                                </div>
+                                <img class="thumbnail" src="{{pdt.image.url}}" alt="">
+                            </a>
+
+                            <div class="down-content">
+                                <div class="box-element product">
+                                    <a href="{% url 'stores_ns:productdetails' %}{{ pdt.id }}">
+                                        <h4 class="pdt-name" style="font-size: medium;">{{pdt.name}}</h4>
+                                    </a>
+                                    <hr>
+                                    <h6 class="calorie">{{pdt.calories|calorie}}</h6>
+                                    <h6 class="price">{{pdt.price|currency}}</h6>
+                                    <!-- <button type="submit" class="btn btn-outline-secondary add-btn">Add to Cart</button> -->
+
+                                    <div class="card-footer row p-0 no-gutters w-100">
+                                        {% if pdt|is_in_cart:request.session.cart %}
+                                        <div class="row w-100 p-0 no-gutters">
+                                            <!-- remove cart item -->
+                                            <form action="/home/#{{pdt.id}}" method="post" class="btn-block col-2">
+                                                {% csrf_token %}
+                                                <input hidden type="text" name="product" value="{{pdt.id}}">
+                                                <input hidden type="text" name="remove" value="true">
+                                                <input type="submit" value="-"
+                                                    class="btn btn-block btn-outline-secondary">
+                                            </form>
+                                            <!-- cart item count -->
+                                            <div class="col text-center">{{ pdt|cart_quantity:request.session.cart }} in
+                                                Cart</div>
+                                            <!-- add cart Item  -->
+                                            <form action="/home/#{{pdt.id}}" method="post" class="btn-block col-2">
+                                                {% csrf_token %}
+                                                <input hidden type="text" name="product" value="{{pdt.id}}">
+                                                <input type="submit" value="+"
+                                                    class="btn btn-block btn-outline-secondary">
+                                            </form>
+                                        </div>
+                                        {% else %}
+                                        <form action="/home/#{{pdt.id}}" method="post" class="btn-block">
+                                            {% csrf_token %}
+                                            <input hidden type="text" name="product" value="{{pdt.id}}">
+                                            <input type="submit" class="btn float-right border btn-light w-100"
+                                                value="Add to Cart">
+
+                                        </form>
+                                        {% endif %}
+                                    </div>
+
+
+                                    <!-- <hr> -->
+                                    <br>
+                                    <div class="star-reviews" >
+                                        <ul class="stars" style="float: left;">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                        <span style="float: right;">Reviews (45)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- <div class="col-md-4">
+                        <div class="product-item">
+                            <a href="#"><img src="{% static 'images/products/product_02.jpg' %}" alt=""></a>
+                            <div class="down-content">
+                                <a href="#">
+                                    <h4>Pork Noodle Soup</h4>
+                                </a>
+                                <div class="card-img-overlay veg-mark">
+                                    <img src="{% static 'images/Veg_NonVeg/non.png' %}" alt="" srcset="">
+                                </div>
+                                <h6>&#8377 230.00</h6>
+                                <p>Noodles are super quick to prepare and ready in just 30 minutes from start to finish!
+                                </p>
+                                <ul class="stars">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                </ul>
+                                <span>Reviews (54)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-item">
+                            <a href="#"><img src="{% static 'images/products/product_03.jpg' %}" alt=""></a>
+                            <div class="down-content">
+                                <a href="#">
+                                    <h4>Veg Noodles</h4>
+                                </a>
+                                <div class="card-img-overlay veg-mark">
+                                    <img src="{% static 'images/Veg_NonVeg/veg.png' %}" alt="" srcset="">
+                                </div>
+                                <h6>&#8377 110.00</h6>
+                                <p>Noodles are super quick to prepare and ready in just 30 minutes from start to finish!
+                                </p>
+                                <ul class="stars">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star-half-o"></i></li>
+                                    <li><i class="fa fa-star-o"></i></li>
+                                </ul>
+                                <span>Reviews (23)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-item">
+                            <a href="#"><img src="{% static 'images/products/product_04.jpg' %}" alt=""></a>
+                            <div class="down-content">
+                                <a href="#">
+                                    <h4>Chilli Oyster Noodles</h4>
+                                </a>
+                                <div class="card-img-overlay veg-mark">
+                                    <img src="{% static 'images/Veg_NonVeg/non.png' %}" alt="" srcset="">
+                                </div>
+                                <h6>&#8377 170.00</h6>
+                                <p>Noodles are super quick to prepare and ready in just 30 minutes from start to finish!
+                                </p>
+                                <ul class="stars">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                </ul>
+                                <span>Reviews (77)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-item">
+                            <a href="#"><img src="{% static 'images/products/product_05.jpg' %}" alt=""></a>
+                            <div class="down-content">
+                                <a href="#">
+                                    <h4>Egg Mushroom Noodles</h4>
+                                </a>
+                                <div class="card-img-overlay veg-mark">
+                                    <img src="{% static 'images/Veg_NonVeg/veg.png' %}" alt="" srcset="">
+                                </div>
+                                <h6>&#8377 140.00</h6>
+                                <p>Noodles are super quick to prepare and ready in just 30 minutes from start to finish!
+                                </p>
+                                <ul class="stars">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                </ul>
+                                <span>Reviews (33)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-item">
+                            <a href="#"><img src="{% static 'images/products/product_06.jpg' %}" alt=""></a>
+                            <div class="down-content">
+                                <a href="#">
+                                    <h4>Spicy Chicken Noodles</h4>
+                                </a>
+                                <div class="card-img-overlay veg-mark">
+                                    <img src="{% static 'images/Veg_NonVeg/non.png' %}" alt="" srcset="">
+                                </div>
+                                <h6>&#8377 165.50</h6>
+                                <p>Noodles are super quick to prepare and ready in just 30 minutes from start to finish!
+                                </p>
+                                <ul class="stars">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star-half-o"></i></li>
+                                </ul>
+                                <span>Reviews (78)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+                    <div class="best-features">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="section-heading">
+                                        <h2>Plans With S&N</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="left-content">
+                                        <h4>Planning for a meetup?</h4>
+                                        <p>The largest hall in the city, it is perfect for social events, meetings
+                                            and conferences.
+                                            The
+                                            venue can be extended out onto the adjoining lawns. The lawns can be
+                                            used for hosting
+                                            conference lunches, parties and cocktails.</p>
+                                        <ul class="featured-list">
+                                            <li><a href="#">Access 10 meeting rooms, totaling over 25,500 square
+                                                    feet, for a
+                                                    successful
+                                                    business event</a></li>
+                                            <li><a href="#">Customized meeting breaks and creative menus for dining
+                                                    events</a></li>
+                                            <li><a href="#">Open your event with a general session for 1,600 or VIP
+                                                    business
+                                                    meetings in
+                                                    our breakout rooms</a></li>
+                                            <li><a href="#">The largest hall in the city, it is perfect for social
+                                                    events, meetings
+                                                    and
+                                                    conferences.</a></li>
+
+                                        </ul>
+                                        <a href="about.html" class="filled-button">Read More</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="right-image">
+                                        <img src="{% static 'images/page/feature-image.jpg' %}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="call-to-action">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="inner-content">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <h4>Reservations for Travel package, Events &amp; Dining
+                                                    <em>outdoor</em> available
+                                                </h4>
+                                                <p>Perfect plans for perfect trips. Live natural feel. Camp fire.
+                                                    Pleasant and
+                                                    soothing
+                                                    environment with peaceful and relaxing atmosphere. </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="#" class="filled-button">Book Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            {% endblock %}

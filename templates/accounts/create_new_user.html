@@ -1,0 +1,488 @@
+{% extends 'superbase.html' %}
+{% load static %}
+
+
+{% block head %}
+<title>Dashboard</title>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper ">
+  <div class="sidebar" data-color="purple" data-background-color="white"
+    data-image="{% static 'images/side_bar/sidebar-1.png' %}">
+    <div class="logo">
+      <!-- <a href="" class="simple-text logo-mini">
+          SN
+        </a> -->
+      <a href="" class="simple-text logo-normal">
+        Slurpy Noodles
+      </a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'company_ns:staff_dashboard' %}">
+            <i class="material-icons">dashboard</i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <!-- <li class="nav-item ">
+                  <a class="nav-link" href="{% url 'accounts_ns:user_profile' %}">
+                    <i class="material-icons">person</i>
+                    <p>User Profile</p>
+                  </a>
+                </li> -->
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'company_ns:order_management' %}">
+            <i class="material-icons">store_front</i>
+            <p>Manage</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'company_ns:inventory' %}">
+            <i class="material-icons">food_bank</i>
+            <p>Inventory</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'company_ns:analysis' %}">
+            <i class="material-icons">analytics</i>
+            <p>Analysis</p>
+          </a>
+        </li>
+        <li class="nav-item  active ">
+          <a class="nav-link" href="#0">
+            <i class="material-icons">person_add_alt1</i>
+            <p>Create User</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'company_ns:support' %}">
+            <i class="material-icons">forum</i>
+            <p>Support</p>
+          </a>
+        </li>
+        <li class="nav-item active-pro ">
+          <a class="nav-link" href="{% url 'company_ns:settings' %}">
+            <i class="material-icons">settings</i>
+            <p>Settings</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <a class="navbar-brand" href="javascript:;">Create User</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;">
+                <i class="material-icons">notifications</i> Notifications
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+
+
+    <div class="content">
+      <div class="container-fluid">
+
+        <!-- selection menu -->
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">person_add_alt1</i>
+                </div>
+                <p class="card-category">Customer</p>
+                <h3 class="card-title">492
+                </h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">person_search</i>Search
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">person_add_alt1</i>
+                </div>
+                <p class="card-category">Staff</p>
+                <h3 class="card-title">25</h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">person_search</i>Search
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">person_add_alt1</i>
+                </div>
+                <p class="card-category">Staff Admin</p>
+                <h3 class="card-title">7</h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">person_search</i>Search
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                  <button class="btn-ghost text-light"><i class="material-icons ">person_add_alt1</i></button>
+
+                </div>
+                <p class="card-category">Admin</p>
+                <h3 class="card-title">2</h3>
+              </div>
+              <div class="card-footer">
+                <button class="btn-ghost-bg"><i class="material-icons">person_search</i>Search</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- selection menu ends  -->
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">Edit Profile</h4>
+                <p class="card-category">Complete your profile</p>
+              </div>
+              <div class="card-body">
+
+
+
+                <form class="UserProfile">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="input-group" style="margin-top: 1.5rem;text-align: center;">
+                        <label for="">Profile Selector : </label>
+                        <span class="input-group-addon radio-btn">
+                          <input type="radio" name="UserProfile" id="Customer" value="Customer" aria-label="">
+                          <label for="Customer">Customer</label>
+                          <input type="radio" name="UserProfile" id="Staff" value="Staff" aria-label="">
+                          <label for="Staff">Staff</label>
+                          <input type="radio" name="UserProfile" id="StaffAdmin" value="StaffAdmin" aria-label="">
+                          <label for="StaffAdmin">StaffAdmin</label>
+                          <input type="radio" name="UserProfile" id="Admin" value="Admin" aria-label="">
+                          <label for="Admin">Admin</label>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <hr>
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Fist Name</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Last Name</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Adress</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+
+                    <!-- <div class="col-md-4">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" value="">
+                          <span class="form-check-sign">
+                            <span class="check"></span>
+                          </span>
+                        </label>
+                      </div>
+                    </div> -->
+                    <div class="col-md-4">
+                      <div class="input-group" style="margin-top: 1.5rem;">
+                        <span class="input-group-addon radio-btn">
+                          <input type="radio" name="name" id="M" aria-label="">
+                          <label for="M">Male</label>
+                          <input type="radio" name="name" id="F" aria-label="">
+                          <label for="F">Female</label>
+                          <input type="radio" name="name" id="O" aria-label="">
+                          <label for="O">Other</label>
+                        </span>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">City</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">State</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+
+                    <!-- <div class="col-md-4">
+                      <div class="btn-group" mdbDropdown>
+                        <button mdbDropdownToggle type="button" mdbBtn color="primary" class="dropdown-toggle waves-light"
+                          mdbWavesEffect>
+                          Basic dropdown
+                        </button>
+                      
+                        <div class="dropdown-menu dropdown-primary">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                          <div class="divider dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                      </div>
+                    </div> -->
+
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Postal Code</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Email address</label>
+                        <input type="email" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Phone</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Phone 2</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+                  <!-- <hr> -->
+
+                  
+                  <!-- from staff profile  -->
+                  <div class="row" id="StaffProfile" hidden>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating in-blocks">ID Name</label>
+                        <select class="selector-material" form="" name="select-id" id="ActionSelect" required>
+                          <option value="">- - Select - -</option>
+                          <option value="1">Passport</option>
+                          <option value="2">Driving Licence</option>
+                          <option value="3">Aadhar</option>
+                          <option value="4">Voters ID</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating in-blocks">ID Image</label>
+                        <input type="button" class="btn btn-sm btn-white" value="Browse">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating in-blocks">Designation</label>
+                        <select class="selector-material" form="" name="select-designation" id="ActionSelect" required>
+                          <option value="">- - Select - -</option>
+                          <option value="1">MD</option>
+                          <option value="2">Marketing Manager</option>
+                          <option value="3">Accountant</option>
+                          <option value="4">Website Manager</option>
+                          <option value="5">Website Staff</option>
+                          <option value="6">Executive Chef</option>
+                          <option value="7">Sous Chef</option>
+                          <option value="8">Chef</option>
+                          <option value="9">Sales Executive</option>
+                          <option value="10">Packing Staff</option>
+                          <option value="11">Cleaning Staff</option>
+                          <option value="12">Movement Staff</option>
+                          <option value="13">Delivery Staff</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating in-blocks">Profile Image</label>
+                        <!-- <label class="bmd-label-floating in-blocks">image</label> -->
+                        <input type="button" class="btn btn-sm btn-white" value="Browse">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- from Admin profile -->
+                  <div class="row" id="AdminProfile" hidden>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Notes</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Work Reference</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                   <!-- end profiles -->
+                  
+
+
+                  <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                  <div class="clearfix"></div>
+                </form>
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 
+    <form class="type">
+      <p>
+        <input type="radio" name="type" id="guest" value="guest" />
+        <label for="guest">In House</label>
+      </p>
+      <p>
+        <input type="radio" name="type" checked="checked" id="walk_in" value="walk_in" />
+        <label for="walk_in">Walk in</label>
+      </p>
+      <p>
+        <input type="text" name="roomnumber" class="roomNumber" value="qwert" hidden />
+        <input type="text" name="r1" class="r1" value="12345" hidden/>
+      </p>
+    </form> -->
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav class="float-left">
+          <ul>
+            <li>
+              <a href="">
+                SN
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="copyright float-right">
+          <p>Copyright &copy; {% now 'Y' %} S&N.
+            <a rel="nofollow noopener" href="#" target="_blank">SlurpyNoodles</a></p>
+        </div>
+        <!-- your footer here -->
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+
+<script>
+  $("form input:radio").change(function () {
+    if ($(this).val() == "walk_in") {
+      // Disable your roomnumber element here
+      $('.roomNumber').attr('hidden', 'hidden');
+      $('#r1').removeAttr('hidden');
+    } else {
+      // Re-enable here I guess
+      $('.roomNumber').removeAttr('hidden');
+      $('#r1').attr('hidden', 'hidden');
+    }
+
+    function hidefunc() {
+      $('#StaffProfile').attr('hidden', 'hidden');
+      $('#StaffAdminProfile').attr('hidden', 'hidden');
+      $('#AdminProfile').attr('hidden', 'hidden');
+    }
+
+    if (($(this).val() == "Staff") || ($(this).val() == "StaffAdmin")) {
+      hidefunc();
+      $('#StaffProfile').removeAttr('hidden');
+    }
+    else if ($(this).val() == "Admin") {
+      hidefunc();
+      $('#AdminProfile').removeAttr('hidden');
+    }
+    else {
+      hidefunc();
+    }
+
+
+  });
+</script>
+{% endblock %}

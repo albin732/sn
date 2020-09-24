@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% load custom_filter %}
+<!-- {% load static %} -->
+<!-- {% static "image" as baseUrl %} -->
+
+{% block head %}
+<title>products</title>
+{% endblock %}
+
+{% block body %}
+
+<!-- ***** Preloader Start ***** -->
+<!-- <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>   -->
+<!-- ***** Preloader End ***** -->
+
+
+<!-- Page Content -->
+<div class="page-heading products-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-content">
+                    <h4>Delicious & Special</h4>
+                    <h2>Menu</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="products">
+    <div class="container">
+        <div class="row">
+
+
+            <!-- need to tag the position in home=>specials  -->
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <a href="{% url 'stores_ns:home' %}">Our Specials <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-12">
+                <div class="row">
+
+
+
+                    {% for pdt in pdts %}
+                    {% if pdt.active %}
+                    <div class="col-lg-3 col-md-6" id='{{pdt.id}}'>
+                        <div class="pdt-item">
+                            <a href="{% url 'stores_ns:productdetails' %}{{ pdt.id }}">
+                                <div class="card-img-overlay vegmark">
+                                    {% if pdt.veg %}
+                                    <img src="{% static 'images/icons/veg.png' %}" alt="" srcset="">
+                                    {% else %}
+                                    <img src="{% static 'images/icons/nonveg.png' %}" alt="" srcset="">
+                                    {% endif %}
+                                </div>
+                                <img class="thumbnail" src="{{pdt.image.url}}" alt="">
+                            </a>
+
+                            <div class="down-content">
+                                <div class="box-element product">
+                                    <a href="{% url 'stores_ns:productdetails' %}{{ pdt.id }}">
+                                        <h4 class="pdt-name" style="font-size: medium;">{{pdt.name}}</h4>
+                                    </a>
+                                    <hr>
+                                    <h6 class="calorie">{{pdt.calories|calorie}}</h6>
+                                    <h6 class="price">{{pdt.price|currency}}</h6>
+                                    <!-- <button type="submit" class="btn btn-outline-secondary add-btn">Add to Cart</button> -->
+
+                                    <div class="card-footer row p-0 no-gutters w-100">
+                                        {% if pdt|is_in_cart:request.session.cart %}
+                                        <div class="row w-100 p-0 no-gutters">
+                                            <!-- remove cart item (-)-->
+                                            <form action="/home/#{{pdt.id}}" method="post" class="btn-block col-2">
+                                                {% csrf_token %}
+                                                <input hidden type="text" name="product" value="{{pdt.id}}">
+                                                <input hidden type="text" name="remove" value="true">
+                                                <input type="submit" value="-" name="pdts-minus"
+                                                    class="btn btn-block btn-outline-secondary">
+                                            </form>
+                                            <!-- cart item count -->
+                                            <div class="col text-center">{{ pdt|cart_quantity:request.session.cart }} in
+                                                Cart</div>
+                                            <!-- add cart Item  (+)-->
+                                            <form action="/home/#{{pdt.id}}" method="post" class="btn-block col-2">
+                                                {% csrf_token %}
+                                                <input hidden type="text" name="product" value="{{pdt.id}}">
+                                                <input type="submit" value="+" name='pdts-add'
+                                                    class="btn btn-block btn-outline-secondary">
+                                            </form>
+                                        </div>
+                                        {% else %}
+                                        <!--add button-->
+                                        <form action="/home/#{{pdt.id}}" method="post" class="btn-block">
+                                            {% csrf_token %}
+                                            <input hidden type="text" name="product" value="{{pdt.id}}">
+                                            <input type="submit" class="btn float-right border btn-light w-100"
+                                                value="Add to Cart" name='pdts-add-btn'>
+
+                                        </form>
+                                        {% endif %}
+                                    </div>
+
+
+                                    <!-- <hr> -->
+                                    <br>
+                                    <div class="star-reviews" >
+                                        <ul class="stars" style="float: left;">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                        <span style="float: right;">Reviews (45)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+                    {% endfor %}
+
+
+
+                    <!-- <div class="col-lg-4 col-md-4 all fds sp">
+              <div class="product-item">
+                <a href="{% url 'stores_ns:productdetails' %}{{ pdt.id }}"><img
+                    src="{% static 'images/products/product_01.jpg' %}" alt=""></a>
+                <div class="down-content">
+                  <a href="{% url 'stores_ns:productdetails' %}{{ pdt.id }}">
+                    <h4>Shrimp Garlic Noodles</h4>
+                  </a>
+                  <div class="card-img-overlay veg-mark">
+                    <img src="{% static 'images/Veg_NonVeg/non.png' %}" alt="" srcset="">
+                  </div>
+                  <h6 style="margin-top: .09rem;font-size: 17px; color: #f33f3f;">&#8377 175.50</h6>
+                  <p>Noodles are super quick to prepare and ready in just 30 minutes from start to finish!
+                  </p>
+
+                  <div class="custom-add-button">
+                    <button type="submit" class="add-button">Add to Cart</button>
+                  </div>
+                  <br>
+                  <ul class="stars">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <span>Reviews (45)</span>
+                </div>
+              </div>
+            </div> -->
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <ul class="pages">
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+{% endblock %}

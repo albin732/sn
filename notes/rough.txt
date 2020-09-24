@@ -1,0 +1,6 @@
+session removal
+        # del request.session['cart']
+        # request.session.modified = True
+        
+        # request.session['cart'] = cart
+        # print('cart',request.session['cart'])
