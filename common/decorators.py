@@ -38,7 +38,7 @@ def allowed_users(allowed_roles=[]):
 # @staff_required
 def staff_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='/accounts/login'):
     '''
-    Decorator for views that checks that the logged in user is a student,
+    Decorator for views that checks that the logged in user is a staff,
     redirects to the log-in page if necessary.
     '''
     
@@ -54,7 +54,7 @@ def staff_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
 
 def admin_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='/accounts/err_404'):
     '''
-    Decorator for views that checks that the logged in user is a student,
+    Decorator for views that checks that the logged in user is a admin,
     redirects to the log-in page if necessary.
     '''
     
